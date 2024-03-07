@@ -7,6 +7,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <App children={<DeviceList />} />,
   },
+  {
+    path: "/devices/:codename",
+    element: <App children={<DeviceList />} />,
+  },
 ]);
 
 export default router;

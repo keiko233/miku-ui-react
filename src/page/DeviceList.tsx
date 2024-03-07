@@ -1,17 +1,30 @@
 import { Box, Grid } from "@mui/material";
 import { Device } from "../types";
-import { useState } from "react";
-import { getDeivces } from "../utils/api";
+import { useEffect, useState } from "react";
+import { getDeivceByCodename, getDeivces } from "../utils/api";
 import DeviceCard from "../components/DeviceCard";
+import { useParams } from "react-router-dom";
 
 const DeviceList = () => {
+  const { codename } = useParams();
+  
   const [devices, setDevices] = useState<Device[]>([]);
 
-  const requestDevices = async () => {
-    setDevices(await getDeivces());
-  };
+  useEffect(() => {
+    const fetchDevices = async () => {
+      try {
+        if (codename) {
+          setDevices(await getDeivceByCodename(codename));
+        } else {
+          setDevices(await getDeivces());
+        }
+      } catch (error) {
+        console.error("Error fetching devices:", error);
+      }
+    };
 
-  requestDevices();
+    fetchDevices();
+  }, [codename]);
 
   return (
     <Box sx={{ flexGrow: 1 }}>

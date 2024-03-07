@@ -75,8 +75,8 @@ const DevicesCard = ({
       </CardContent>
 
       <CardActions>
-        <Button size="small">Download</Button>
-        <Button size="small">Detail</Button>
+        <Button>Download</Button>
+        <Button>Detail</Button>
       </CardActions>
     </Card>
   );
