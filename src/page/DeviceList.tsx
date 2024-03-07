@@ -17,7 +17,7 @@ const DeviceList = () => {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
         {devices.map((device) => (
-          <Grid item xs={12} sm={6} md={4}>
+          <Grid key={device.id} item xs={12} sm={6} md={4}>
             <DeviceCard {...device} />
           </Grid>
         ))}

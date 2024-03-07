@@ -65,8 +65,8 @@ const DevicesCard = ({
         </Typography>
 
         <Typography variant="body2" color="text.secondary">
-          {texts.map((item) => (
-            <p>
+          {texts.map((item, index) => (
+            <p key={index}>
               <b>{item.label}: </b>
               {item.value}
             </p>
