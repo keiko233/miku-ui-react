@@ -1,4 +1,5 @@
 import { ofetch } from "ofetch";
+import { Device } from "../../types";
 
 export const getInfo = async () => {
   return await ofetch<{
@@ -11,9 +12,9 @@ export const getInfo = async () => {
 };
 
 export const getDeivces = async () => {
-  return await ofetch("/api/devices");
+  return await ofetch<Device[]>("/api/devices");
 };
 
 export const getDeivceByCodename = async (codename: string) => {
-  return await ofetch(`/api/devices/${codename}`);
+  return await ofetch<Device[]>(`/api/devices/${codename}`);
 };
