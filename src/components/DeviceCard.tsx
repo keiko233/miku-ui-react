@@ -36,6 +36,7 @@ const DevicesCard = ({
     Violet: "/devices/Violet.png",
     Wayne: "/devices/Wayne.png",
     zijin: "/devices/zijin.jpg",
+    "mona/zijin": "/devices/mona.png",
   };
 
   return (
