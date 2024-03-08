@@ -36,8 +36,14 @@ const AppBar = ({ onClickMenu, sxContainer }: Props) => {
             <MenuIcon />
           </IconButton>
 
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Dashboard
+          <Typography sx={{ flexGrow: 1 }}>
+            <img
+              style={{
+                height: "36px",
+              }}
+              src="/mikuui_banner.png"
+              alt="logo"
+            />
           </Typography>
 
           <Button
