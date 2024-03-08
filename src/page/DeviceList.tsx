@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, CircularProgress, Grid } from "@mui/material";
 import { Device } from "../types";
 import { useEffect, useState } from "react";
 import { getDeivceByCodename, getDeivces } from "../utils/api";
@@ -7,11 +7,13 @@ import { useParams } from "react-router-dom";
 
 const DeviceList = () => {
   const { codename } = useParams();
-  
+
   const [devices, setDevices] = useState<Device[]>([]);
 
   useEffect(() => {
     const fetchDevices = async () => {
+      setDevices([]);
+
       try {
         if (codename) {
           setDevices(await getDeivceByCodename(codename));
@@ -25,6 +27,22 @@ const DeviceList = () => {
 
     fetchDevices();
   }, [codename]);
+
+  if (devices.length === 0) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          width: "100%",
+          height: "calc(100vh - 64px - 48px)",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
