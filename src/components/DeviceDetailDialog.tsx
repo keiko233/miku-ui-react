@@ -16,7 +16,7 @@ interface Props {
 
 const DeviceDetailDialog = ({ open, onClose, changelog, note }: Props) => {
   return (
-    <Dialog open={open} keepMounted onClose={onClose}>
+    <Dialog open={open} onClose={onClose}>
       <DialogTitle>Change Log:</DialogTitle>
 
       <DialogContent>
