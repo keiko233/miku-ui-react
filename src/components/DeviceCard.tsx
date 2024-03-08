@@ -7,6 +7,8 @@ import {
   Button,
 } from "@mui/material";
 import { Device } from "../types";
+import { useState } from "react";
+import DeviceDetailDialog from "./DeviceDetailDialog";
 
 interface Props extends Device {}
 
@@ -19,6 +21,9 @@ const DevicesCard = ({
   selinux,
   kernelsu,
   date,
+  sourcforge_url,
+  changelog,
+  note,
 }: Props) => {
   const texts = [
     { label: "Miku UI", value: version },
@@ -39,46 +44,60 @@ const DevicesCard = ({
     "mona/zijin": "/devices/mona.png",
   };
 
+  const [dialogStatus, setDialogStatus] = useState(false);
+
   return (
-    <Card
-      sx={{
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-around",
-      }}
-    >
-      <CardMedia
+    <>
+      <Card
         sx={{
-          height: 140,
-          backgroundSize: "contain",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-around",
         }}
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        image={imgMap[device]}
-        title="green iguana"
-      />
+      >
+        <CardMedia
+          sx={{
+            height: 140,
+            backgroundSize: "contain",
+          }}
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
+          image={imgMap[device]}
+          title="green iguana"
+        />
 
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {name} / {device}
-        </Typography>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {name} / {device}
+          </Typography>
 
-        <Typography variant="body2" color="text.secondary">
           {texts.map((item, index) => (
-            <p key={index}>
-              <b>{item.label}: </b>
-              {item.value}
-            </p>
+            <Typography key={index} variant="body2" color="text.secondary">
+              <span>
+                <b>{item.label}: </b>
+                {item.value}
+              </span>
+            </Typography>
           ))}
-        </Typography>
-      </CardContent>
+        </CardContent>
 
-      <CardActions>
-        <Button>Download</Button>
-        <Button>Detail</Button>
-      </CardActions>
-    </Card>
+        <CardActions>
+          <Button href={sourcforge_url} target="_blank">
+            Download
+          </Button>
+
+          <Button onClick={() => setDialogStatus(true)}>Detail</Button>
+        </CardActions>
+      </Card>
+
+      <DeviceDetailDialog
+        open={dialogStatus}
+        onClose={() => setDialogStatus(false)}
+        changelog={JSON.parse(changelog)}
+        note={JSON.parse(note)}
+      />
+    </>
   );
 };
 
