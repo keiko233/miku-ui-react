@@ -25,13 +25,18 @@ const DeviceDetailDialog = ({ open, onClose, changelog, note }: Props) => {
         ))}
       </DialogContent>
 
-      <DialogTitle>Notes:</DialogTitle>
+      {Number(note?.length) > 0 && (
+        <>
+          <DialogTitle>Notes:</DialogTitle>
 
-      <DialogContent>
-        {note?.map((str, index) => (
-          <DialogContentText key={index}>{str}</DialogContentText>
-        ))}
-      </DialogContent>
+          <DialogContent>
+            {note?.map((str, index) => (
+              <DialogContentText key={index}>{str}</DialogContentText>
+            ))}
+          </DialogContent>
+        </>
+      )}
+
       <DialogActions>
         <Button onClick={onClose}>Close</Button>
       </DialogActions>
