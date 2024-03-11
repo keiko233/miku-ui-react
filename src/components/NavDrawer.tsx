@@ -1,6 +1,7 @@
 import { Box, SxProps, useMediaQuery } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
 import { ReactNode } from "react";
+import Player from "./Player";
 
 interface Props {
   drawerWidth?: number;
@@ -34,6 +35,7 @@ const NavDrawer = ({
       aria-label="mailbox folders"
     >
       <Drawer
+        keepMounted
         variant={isSmallScreen ? "temporary" : "permanent"}
         sx={{
           "& .MuiPaper-root ": {
@@ -46,6 +48,8 @@ const NavDrawer = ({
               transform: drawerStatus
                 ? "none"
                 : `translateX(-${drawerWidth}px)`,
+              overflowX: "hidden",
+              overflowY: "auto",
             },
           }),
           ...sxDrawer,
@@ -54,6 +58,13 @@ const NavDrawer = ({
         onClose={onClose}
       >
         {children}
+
+        <Player
+          sx={{
+            margin: 2,
+            width: `calc(${drawerWidth}px - 32px) !important`,
+          }}
+        />
       </Drawer>
     </Box>
   );
